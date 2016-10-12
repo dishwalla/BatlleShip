@@ -20,6 +20,8 @@ public class Frame extends JApplet{
    // public static Map<Integer, Integer> coordinates = Cell.cellCoordinates;
     //public static Map<Map<Integer, Integer>, Integer> cells = new HashMap<>();
     public int cellsNumber = 1;
+    public Cell.CellState state;
+    public Cell currentCell;
 
    public static void main(String s[]) {
     /*    Frame frame = new Frame();
@@ -45,9 +47,11 @@ public class Frame extends JApplet{
                 g2.draw(new Rectangle2D.Double(x, y, 20, 20));
                 //  if (i%2 ==0 && j%2==0) {g2.setColor(Color.RED);} else g2.setPaint(Color.gray);
                 x += 20;
-                Cell currentCell = new Cell();
                 currentCell = frame[i][j];
-                Cell.CellState state = Cell.CellState.EMPTY;
+                currentCell = new Cell();
+               state = Cell.CellState.EMPTY;
+               currentCell.setState(state);
+
              //  Cell.cellCoordinates.put(x, y);
              //   Cell.cells.put(cellsNumber, Cell.cellCoordinates);
                 if (cellsNumber == 100) break; else
@@ -55,6 +59,7 @@ public class Frame extends JApplet{
             }
         }
         System.out.println(cellsNumber);
+        System.out.println(currentCell.getState());
        //System.out.println(Cell.cellCoordinates);
 
 
@@ -85,7 +90,6 @@ public class Frame extends JApplet{
         applet.init();
         f.pack();
         f.setSize(new Dimension(220, 220));
-
        /* Timer t = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

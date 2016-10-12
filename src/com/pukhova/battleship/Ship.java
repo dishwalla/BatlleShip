@@ -20,11 +20,6 @@ public class Ship implements Markable {
     }
 
     @Override
-    public void markShip(Ship.ShipState state) {
-
-    }
-
-    @Override
     public void markAsShip() {
     }
 
