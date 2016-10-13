@@ -1,42 +1,66 @@
 package com.pukhova.battleship;
 
-import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 /**
  * Created by Olga_Pukhova on 10/10/2016.
  */
 public class EntryPoint {
 
-    //public Map<Integer, Integer> ships = new HashMap<>();
     public static Cell[][] frame = new Cell[10][10];
-    public static Cell[][] counterpartysframe = new Cell[10][10];
-    //public static Map<Map<Integer, Integer>, Integer> ships = new HashMap<>();
+    //public static Cell[][] counterpartysframe = new Cell[10][10];
     //public static Map<Integer, Integer> shipCoordinates = new HashMap<>();
-    public static Map<Integer, Boolean> shipDetails = new HashMap<>();
-    public static Map<Integer, Map<Boolean, Integer>> ship = Ship.shipDetails;
+    public static Map<Map<Integer, Integer>, Map<Integer, Boolean>> ships = Ship.shipDetails;
+    public static Map<Integer, Integer> shipsSize = new HashMap<>();
+    public static Map<Integer, Boolean> shipsPotition = new HashMap<>();
+    //Ship.ship;
     public static Map<Integer, Map<Integer, Integer>> cellsDetails = Cell.cells;
     private int shipsNumber =1;
+    public Ship.ShipState state;
+    public Ship currentShip;
 
-   /* public static void main(String s[]) {
-         Frame f = new Frame();
-         f.drawFrame();
-        // System.out.println(f.getCellsNumber());
+    public static void main(String s[]) {
+        EntryPoint e = new EntryPoint();
+        e.createShipsSet();
+        System.out.println("\t");
+        for (Map.Entry<Integer, Integer> entry : shipsSize.entrySet()) {
+            Integer key = entry.getKey();
+            Integer value = entry.getValue();
+            System.out.println(key + " " + value);
+        }
+        System.out.println("\t");
+        for (Map.Entry<Integer, Boolean> entry : shipsPotition.entrySet()) {
+            Integer key = entry.getKey();
+            Boolean value = entry.getValue();
+            System.out.println(key + " " + value);
+        }
+
     }
 
-    /*public static void main(String[] args) {
-        EntryPoint ep = new EntryPoint();
-        ep.ships.put(1, 4);
-        ep.ships.put(2, 3);
-        ep.ships.put(3, 2);
-        ep.ships.put(4, 1);
-    } */
-
-    public void placeTheShips(){
+    public void createShipsSet(){
         Random r = new Random();
-
-        for (int i=0; i<10; i++){
-            shipDetails.put(shipsNumber, r.nextBoolean());
+        int[] pickTheShip = {1, 1, 1, 1, 2, 2, 2, 3, 3, 4};
+        List<Integer> pickTheShipArray = new ArrayList<Integer>();
+        for (int i: pickTheShip) {
+            pickTheShipArray.add(i);
+        }
+        for (int i=1; i<=10; i++){
+            currentShip = new Ship();
+            currentShip.setIndex(shipsNumber);
+            // System.out.println(currentShip.getIndex());
+            boolean b = r.nextBoolean();
+            currentShip.setPosition(b);
+            //System.out.println(currentShip.isPosition());
+            shipsPotition.put(currentShip.getIndex(), currentShip.isPosition());
+            while(pickTheShipArray != null){
+                int random = r.nextInt(pickTheShipArray.size());
+                currentShip.setCellsQuantity(pickTheShipArray.get(random));
+                // System.out.println(currentShip.getCellsQuantity());
+                shipsSize.put(currentShip.getIndex(), currentShip.getCellsQuantity());
+                pickTheShipArray.remove(random);
+                break;
+            }
             shipsNumber++;
         }
 
@@ -46,8 +70,8 @@ public class EntryPoint {
             //ship.put(cellsDetails.get(k), ship(k, ));
         }
 
-
     }
+
     public void drawMyFrame(){
 
     }
@@ -59,4 +83,5 @@ public class EntryPoint {
         Random r = new Random();
         return r.nextInt((max - min) + 1) + min;
     }
+
 }

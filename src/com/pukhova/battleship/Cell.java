@@ -11,6 +11,7 @@ public class Cell implements Markable{
     private int index;
     public enum CellState {EMPTY, VISITED, PADDED, SHIP};
     public CellState state;
+
     public Map<Integer, Integer> cellCoordinates = new HashMap<>();
     public static Map<Integer, Map<Integer, Integer>> cells = new HashMap<>();
 
@@ -25,7 +26,7 @@ public class Cell implements Markable{
         setState(state);
     }
 
-     public CellState getState() {
+    public CellState getState() {
         return state;
     }
 

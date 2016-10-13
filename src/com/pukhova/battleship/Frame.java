@@ -84,7 +84,6 @@ public class Frame extends JApplet{
         });
         JApplet applet = new Frame();
         Frame frame = new Frame();
-       // JFrame myFrame=new JFrame("Test");
         f.add(frame);
         f.getContentPane().add("Center", applet);
         applet.init();
