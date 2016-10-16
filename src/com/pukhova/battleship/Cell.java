@@ -9,22 +9,21 @@ import java.util.Map;
 public class Cell implements Markable{
 
     private int index;
+    private boolean isAShip = false;
     public enum CellState {EMPTY, VISITED, PADDED, SHIP};
     public CellState state;
+    private int x;
+    private int y;
+    //public Map<Integer, Integer> cellCoordinates = new HashMap<>();
+    //public static Map<Integer, Map<Integer, Integer>> cells = new HashMap<>();
 
-    public Map<Integer, Integer> cellCoordinates = new HashMap<>();
-    public static Map<Integer, Map<Integer, Integer>> cells = new HashMap<>();
+    public Cell(){}
 
-    public Cell(){};
-
-    public Cell(int index, Map<Integer, Integer> coordinates){
+    public Cell(int index, int x, int y){
         this.index = index;
-        cells.put(index, coordinates);
-    }
-    @Override
-    public void markCell(CellState state) {
-        setState(state);
-    }
+        this.x = x;
+        this.y = y;
+    };
 
     public CellState getState() {
         return state;
@@ -37,6 +36,30 @@ public class Cell implements Markable{
     @Override
     public void markAsShip() {
 
+    }
+
+    public boolean isAShip() {
+        return isAShip;
+    }
+
+    public void setAShip(boolean AShip) {
+        isAShip = AShip;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     @Override

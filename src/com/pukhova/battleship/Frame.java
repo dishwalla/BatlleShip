@@ -38,8 +38,8 @@ public class Frame extends JApplet{
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setPaint(Color.gray);
-        int y = 5;
         g2.setStroke(stroke);
+        int y = 5;
         for (int i = 0; i <=frame.length-1; i++) {
             int x = 5;
             if (i>0) y += 20;
@@ -61,7 +61,6 @@ public class Frame extends JApplet{
         System.out.println(cellsNumber);
         System.out.println(currentCell.getState());
        //System.out.println(Cell.cellCoordinates);
-
 
         // System.out.println(Cell.cellCount);
         //  for (int i = 0; i <= frame.length - 1; i++) {
@@ -89,13 +88,6 @@ public class Frame extends JApplet{
         applet.init();
         f.pack();
         f.setSize(new Dimension(220, 220));
-       /* Timer t = new Timer(1000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //applet.method();
-            }
-        });
-        t.start(); */
     }
 
     public void drawVisitedCell(){

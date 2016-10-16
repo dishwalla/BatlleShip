@@ -7,6 +7,6 @@ public interface Markable {
 
     public void markAsShip();
     public void markAsVisited();
-    default void markCell(Cell.CellState state){};
+   // default void markCell(Cell.CellState state){};
   //  default void markShip(Ship.ShipState state){};
 }
