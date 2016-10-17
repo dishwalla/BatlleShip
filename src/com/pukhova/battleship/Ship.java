@@ -14,9 +14,9 @@ public class Ship implements Markable {
     private int cellsQuantity;
     public enum ShipState {DEFAULT, PADDED, KILLED};
     public ShipState state;
-   //public static Map<Integer, Boolean> ship = new HashMap<>();
-    public static Map<Map<Integer, Integer>, Map<Integer, Boolean>> shipDetails = new HashMap<>();
-    public static Map<Integer, Integer> shipStartCoordinates = new HashMap<>();
+    //public static Map<Integer, Boolean> ship = new HashMap<>();
+    //public static Map<Map<Integer, Integer>, Map<Integer, Boolean>> shipDetails = new HashMap<>();
+    //public static Map<Integer, Integer> shipStartCoordinates = new HashMap<>();
 
     public Ship(){}
 
