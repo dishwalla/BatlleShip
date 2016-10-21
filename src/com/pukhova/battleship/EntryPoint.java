@@ -8,23 +8,23 @@ import java.util.List;
  */
 public class EntryPoint {
     //public static Cell[][] counterpartysframe = new Cell[10][10];
+    // public static List<Cell> bookedCells = cells;
+    // public Integer[] n = new Integer[randomNumbers.size()];
+    //Iterator<Cell> itr = cells.iterator();
     public static Cell[][] frame = new Cell[10][10];
-    public static Map<Integer, Integer> shipsSize = new HashMap<>();
-    public static Map<Integer, Boolean> shipsPosition = new HashMap<>();
-    public static List<Cell> ships = new ArrayList<>();
+    public static Map<Integer, Integer> shipsSize = new LinkedHashMap<>();
+    public static Map<Integer, Boolean> shipsPosition = new LinkedHashMap<>();
+    public static List<Cell> chosenShips =  new ArrayList<>();
     public static List<Cell> cells = new ArrayList<>();
- //   public static List<Cell> bookedCells = cells;
-    // public int[] supplyNumbers = new int[100];
+    public static List<Ship> ships = new ArrayList<>();
     public static Set<Integer> randomNumbers = new HashSet<Integer>();
     public static Set<Integer> randomNumbers2 = new HashSet<Integer>();
     public static List<Integer> sortedList = new ArrayList();
-    // public Integer[] n = new Integer[randomNumbers.size()];
-    //Iterator<Cell> itr = cells.iterator();
+
     public Cell currentCell;
     public Ship currentShip;
-    private int shipsNumber = 1;
+    private int shipsNumber = 0;
     public int cellsNumber = 0;
-    public int counter = 1;
     public Cell.CellState state;
 
     public static void main(String s[]) {
@@ -32,6 +32,26 @@ public class EntryPoint {
         e.drawMyFrame();
         e.createShipsSet();
 
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                //System.out.printf((frame[i][j]).isAShip()+ " ");
+                // System.out.printf((frame[i][j].state).toString() + " ");
+                System.out.printf((frame[i][j].state).toString() + " ");
+                // System.out.printf((frame[i][j].state).toString() + " " + (frame[i][j]).getX() + " " + (frame[i][j]).getY() +  " " + frame[i][j].getIndex());
+            }
+            System.out.println();
+        }
+        System.out.println();
+        for (Cell cell : chosenShips) {
+            System.out.printf(String.valueOf(cell.getState()) + String.valueOf(cell.getIndex()) + " ");
+        }
+        System.out.println();
+        System.out.println(chosenShips.size());
+        System.out.println();
+        for (Ship ship : ships) {
+            System.out.printf(String.valueOf(ship.getIndex()) + " " + String.valueOf(ship.getCellsQuantity()) + " " +String.valueOf(ship.isPosition()) + "|");
+        }
+/*
         System.out.println("\t");
         for (Map.Entry<Integer, Integer> entry : shipsSize.entrySet()) {
             Integer key = entry.getKey();
@@ -45,45 +65,31 @@ public class EntryPoint {
             System.out.println(key + " " + value);
         }
 
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                //System.out.printf((frame[i][j]).isAShip()+ " ");
-                // System.out.printf((frame[i][j].state).toString() + " ");
-                System.out.printf((frame[i][j].state).toString() + " ");
-                // System.out.printf((frame[i][j].state).toString() + " " + (frame[i][j]).getX() + " " + (frame[i][j]).getY() +  " " + frame[i][j].getIndex());
-            }
-            System.out.println();
-        }
-
         // sortedList = new ArrayList(randomNumbers);
         // Collections.sort(sortedList);
         //  for (Integer i : sortedList) {
         //      System.out.printf(i + " ");
         //  }
 
-        for (Integer i : randomNumbers) {
+       for (Integer i : randomNumbers) {
             System.out.printf(i + " ");
         }
         System.out.println();
         for (Integer i : randomNumbers2) {
             System.out.printf(i + " ");
         }
-        System.out.println();
-        for (Cell cell : ships) {
-            System.out.printf(String.valueOf(cell.getIndex()) + " ");
+         System.out.println();
+        for (Cell cell : cells) {
+            System.out.printf(String.valueOf(cell.getState()) + String.valueOf(cell.getIndex()) + " ");
         }
-     /*   System.out.println();
+       System.out.println();
         for (Cell cell : bookedCells) {
             System.out.printf(String.valueOf(cell.getState()) + " ");
         } */
-        System.out.println();
-        for (Cell cell : cells) {
-            System.out.printf(String.valueOf(cell.getState()) + " ");
-        }
+
     }
 
     public void createShipsSet() {
-//randomizing ships on the frame
         Cell[][] newFrame = new Cell[10][10];
         Random r = new Random();
         int[] pickTheShip = {1, 1, 1, 1, 2, 2, 2, 3, 3, 4};
@@ -94,7 +100,7 @@ public class EntryPoint {
         for (int i = 0; i < 100; i++) {
             randomNumbers2.add(i);
         }
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 0; i < 10; i++) {
             currentShip = new Ship();
             currentShip.setIndex(shipsNumber);
             boolean b = r.nextBoolean();
@@ -107,6 +113,7 @@ public class EntryPoint {
                 pickTheShipArray.remove(random);
                 break;
             }
+            ships.add(currentShip);
             shipsNumber++;
         }
       /*  while(randomNumbers.size() < 10) {
@@ -122,105 +129,110 @@ public class EntryPoint {
             //randomNumbers.add(tempRandom);
             //int random = r.nextInt(cells.size());
             int random = getRandomNumberInRange(0, 99);
-           // if (!randomNumbers.contains(random))
-                randomNumbers.add(random);
-          //  {
-                // else counter--;
-                Cell cell = cells.get(random-1);
-                cell.setState(Cell.CellState.SHIP);
-                cell.setAShip(true);
-                ships.add(cell);
-                randomNumbers2.remove(random);
-                boolean b = shipsPosition.get(randomNumbers.size());
-                int k = shipsSize.get(randomNumbers.size());
-                // if (cell.getState() == Cell.CellState.SHIP && k > 1 && b == true) {
-                if (k > 1 && b == true) {
-                    switch (k) {
-                        case 2:
-                            cells.get(cell.getIndex() + 1).setState(Cell.CellState.SHIP);
+            //if (!randomNumbers.contains(random))
+            randomNumbers.add(random);
+            Cell cell = cells.get(random);
+            cell.setState(Cell.CellState.SHIP);
+            cell.setAShip(true);
+            chosenShips.add(cell);
+            randomNumbers2.remove(random);
+            boolean b = ships.get(randomNumbers.size()-1).isPosition();
+            int k = ships.get(randomNumbers.size()-1).getCellsQuantity();
+            //      boolean b = shipsPosition.get(randomNumbers.size()-1);
+            // System.out.println(b);
+            //      int k = shipsSize.get(randomNumbers.size()-1);
+            // System.out.println(k);
+            // if (cell.getState() == Cell.CellState.SHIP && k > 1 && b == true) {
+            if (k > 1 && b == true) {
+                switch (k) {
+                    case 2:
+                        if (cell.getIndex()%10 <= 8) {
+                            cells.get(cell.getIndex() + 1).setState(Cell.CellState.PADDED);
                             cells.get(cell.getIndex() + 1).setAShip(true);
-                            ships.add(cells.get(cell.getIndex() + 1));
+                            //chosenShips.add(cells.get(cell.getIndex() + 1));
                             // bookedCells.remove(cell.getIndex());
                             //   bookedCells.remove(cell.getIndex() + 1);
                             break;
-                        case 3:
-                            cells.get(cell.getIndex() + 1).setState(Cell.CellState.SHIP);
-                            cells.get(cell.getIndex() + 2).setState(Cell.CellState.SHIP);
+                        } else {}
+                    case 3:
+                        if (cell.getIndex()%10 <= 7) {
+                            cells.get(cell.getIndex() + 1).setState(Cell.CellState.PADDED);
+                            cells.get(cell.getIndex() + 2).setState(Cell.CellState.PADDED);
                             cells.get(cell.getIndex() + 1).setAShip(true);
                             cells.get(cell.getIndex() + 2).setAShip(true);
-                            ships.add(cells.get(cell.getIndex() + 1));
-                            ships.add(cells.get(cell.getIndex() + 2));
+                            //chosenShips.add(cells.get(cell.getIndex() + 1));
+                            //chosenShips.add(cells.get(cell.getIndex() + 2));
                             // bookedCells.remove(cell.getIndex());
                             // bookedCells.remove(cell.getIndex() + 1);
                             // bookedCells.remove(cell.getIndex() + 2);
                             break;
-                        case 4:
-                            cells.get(cell.getIndex() + 1).setState(Cell.CellState.SHIP);
-                            cells.get(cell.getIndex() + 2).setState(Cell.CellState.SHIP);
-                            cells.get(cell.getIndex() + 3).setState(Cell.CellState.SHIP);
+                        } else {}
+                    case 4:
+                        if (cell.getIndex()%10 <= 6) {
+                            cells.get(cell.getIndex() + 1).setState(Cell.CellState.PADDED);
+                            cells.get(cell.getIndex() + 2).setState(Cell.CellState.PADDED);
+                            cells.get(cell.getIndex() + 3).setState(Cell.CellState.PADDED);
                             cells.get(cell.getIndex() + 1).setAShip(true);
                             cells.get(cell.getIndex() + 2).setAShip(true);
                             cells.get(cell.getIndex() + 3).setAShip(true);
-                            ships.add(cells.get(cell.getIndex() + 1));
-                            ships.add(cells.get(cell.getIndex() + 2));
-                            ships.add(cells.get(cell.getIndex() + 3));
+                            //chosenShips.add(cells.get(cell.getIndex() + 1));
+                            //chosenShips.add(cells.get(cell.getIndex() + 2));
+                            //chosenShips.add(cells.get(cell.getIndex() + 3));
                             //  bookedCells.remove(cell.getIndex());
                             //  bookedCells.remove(cell.getIndex() + 1);
                             //   bookedCells.remove(cell.getIndex() + 2);
                             //  bookedCells.remove(cell.getIndex() + 3);
                             break;
-                    }
+                        } else {}
                 }
-                //  else if (cell.getState() == Cell.CellState.SHIP && k > 1 && b == false) {
-                else if (k > 1 && b == false) {
-                    switch (k) {
-                        case 2:
-                            if (cell.getIndex() < 90) {
-                                cells.get(cell.getIndex() + 10).setState(Cell.CellState.SHIP);
-                                cells.get(cell.getIndex() + 10).setAShip(true);
-                                ships.add(cells.get(cell.getIndex() + 10));
-                                //   bookedCells.remove(cell.getIndex());
-                                //  bookedCells.remove(cell.getIndex() + 10);
-                                break;
-                            }
-                            //else return;
-                        case 3:
-                            if (cell.getIndex() < 80) {
-                                cells.get(cell.getIndex() + 10).setState(Cell.CellState.SHIP);
-                                cells.get(cell.getIndex() + 20).setState(Cell.CellState.SHIP);
-                                cells.get(cell.getIndex() + 10).setAShip(true);
-                                cells.get(cell.getIndex() + 20).setAShip(true);
-                                ships.add(cells.get(cell.getIndex() + 10));
-                                ships.add(cells.get(cell.getIndex() + 20));
-                                //   bookedCells.remove(cell.getIndex());
-                                //    bookedCells.remove(cell.getIndex() + 10);
-                                //   bookedCells.remove(cell.getIndex() + 20);
-                                break;
-                            }
-                            //else return;
-                        case 4:
-                            if (cell.getIndex() < 70) {
-                                cells.get(cell.getIndex() + 10).setState(Cell.CellState.SHIP);
-                                cells.get(cell.getIndex() + 20).setState(Cell.CellState.SHIP);
-                                cells.get(cell.getIndex() + 30).setState(Cell.CellState.SHIP);
-                                cells.get(cell.getIndex() + 10).setAShip(true);
-                                cells.get(cell.getIndex() + 20).setAShip(true);
-                                cells.get(cell.getIndex() + 30).setAShip(true);
-                                ships.add(cells.get(cell.getIndex() + 10));
-                                ships.add(cells.get(cell.getIndex() + 20));
-                                ships.add(cells.get(cell.getIndex() + 30));
-                                //  bookedCells.remove(cell.getIndex());
-                                //  bookedCells.remove(cell.getIndex() + 10);
-                                //   bookedCells.remove(cell.getIndex() + 20);
-                                //   bookedCells.remove(cell.getIndex() + 30);
-                                break;
-                            } //else return;
-                    }
-                }
-                counter++;
             }
-
-   //     }
+            //  else if (cell.getState() == Cell.CellState.SHIP && k > 1 && b == false) {
+            else if (k > 1 && b == false) {
+                switch (k) {
+                    case 2:
+                        if (cell.getIndex() < 90) {
+                            cells.get(cell.getIndex() + 10).setState(Cell.CellState.VISITED);
+                            cells.get(cell.getIndex() + 10).setAShip(true);
+                            //chosenShips.add(cells.get(cell.getIndex() + 10));
+                            //   bookedCells.remove(cell.getIndex());
+                            //  bookedCells.remove(cell.getIndex() + 10);
+                            break;
+                        }
+                        else {}
+                    case 3:
+                        if (cell.getIndex() < 80) {
+                            cells.get(cell.getIndex() + 10).setState(Cell.CellState.VISITED);
+                            cells.get(cell.getIndex() + 20).setState(Cell.CellState.VISITED);
+                            cells.get(cell.getIndex() + 10).setAShip(true);
+                            cells.get(cell.getIndex() + 20).setAShip(true);
+                            //chosenShips.add(cells.get(cell.getIndex() + 10));
+                            //chosenShips.add(cells.get(cell.getIndex() + 20));
+                            //   bookedCells.remove(cell.getIndex());
+                            //    bookedCells.remove(cell.getIndex() + 10);
+                            //   bookedCells.remove(cell.getIndex() + 20);
+                            break;
+                        }
+                        else {}
+                    case 4:
+                        if (cell.getIndex() < 70) {
+                            cells.get(cell.getIndex() + 10).setState(Cell.CellState.VISITED);
+                            cells.get(cell.getIndex() + 20).setState(Cell.CellState.VISITED);
+                            cells.get(cell.getIndex() + 30).setState(Cell.CellState.VISITED);
+                            cells.get(cell.getIndex() + 10).setAShip(true);
+                            cells.get(cell.getIndex() + 20).setAShip(true);
+                            cells.get(cell.getIndex() + 30).setAShip(true);
+                            //chosenShips.add(cells.get(cell.getIndex() + 10));
+                            //chosenShips.add(cells.get(cell.getIndex() + 20));
+                            //chosenShips.add(cells.get(cell.getIndex() + 30));
+                            //  bookedCells.remove(cell.getIndex());
+                            //  bookedCells.remove(cell.getIndex() + 10);
+                            //   bookedCells.remove(cell.getIndex() + 20);
+                            //   bookedCells.remove(cell.getIndex() + 30);
+                            break;
+                        } else {}
+                }
+            }
+        }
     }
  /*       for (int l = 0; l < 100; l++) {
             for (int i = 0; i < 10; i++) {
@@ -237,19 +249,19 @@ public class EntryPoint {
                     if (frame[i][j].getIndex() == tempRandom) {
                         frame[i][j].setState(Cell.CellState.SHIP);
                         frame[i][j].setAShip(true);
-                        ships.add(frame[i][j]);
+                        chosenShips.add(frame[i][j]);
                     }
                 }
             } */
 
-//This block sets ships on chosen places
+//This block sets chosenShips on chosen places
   /*      for (int l = 0; l < n.length; l++) {
             for (int i = 0; i < 10; i++) {
                 for (int j = 0; j < 10; j++) {
                     if (frame[i][j].getIndex() == n[l]) {
                         frame[i][j].setState(Cell.CellState.SHIP);
                         frame[i][j].setAShip(true);
-                        ships.add(frame[i][j]);
+                        chosenShips.add(frame[i][j]);
                         cells.add(frame[i][j].getIndex(), frame[i][j]);
                     }
                 }
@@ -257,11 +269,11 @@ public class EntryPoint {
         }     */
 
 
-// this loop adding required cells to the ships
-/*        for (int k = 0; k < ships.size(); k++) {
+// this loop adding required cells to the chosenShips
+/*        for (int k = 0; k < chosenShips.size(); k++) {
             int l = shipsSize.get(k + 1);
             boolean b = shipsPosition.get(k + 1);
-            Cell thisCell = ships.get(k);
+            Cell thisCell = chosenShips.get(k);
             //Cell thisCell = cells.get(k);
             if (thisCell.getState() == Cell.CellState.SHIP && l > 1 && b == true) {
                 switch (l) {
