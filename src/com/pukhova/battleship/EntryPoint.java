@@ -34,9 +34,10 @@ public class EntryPoint {
 
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                //System.out.printf((frame[i][j]).isAShip()+ " ");
-                // System.out.printf((frame[i][j].state).toString() + " ");
-                System.out.printf((frame[i][j].state).toString() + " ");
+                if (frame[i][j].state == Cell.CellState.SHIP || frame[i][j].state == Cell.CellState.PADDED || frame[i][j].state == Cell.CellState.VISITED)
+                   System.out.printf("X");
+                else if (frame[i][j].state == Cell.CellState.EMPTY) System.out.printf("O");
+        //        System.out.printf((frame[i][j].state).toString() + " ");
                 // System.out.printf((frame[i][j].state).toString() + " " + (frame[i][j]).getX() + " " + (frame[i][j]).getY() +  " " + frame[i][j].getIndex());
             }
             System.out.println();

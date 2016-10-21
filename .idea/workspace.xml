@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="657ab714-d065-4dba-8fa7-68b896efa9a8" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/SeaFight/com/pukhova/battleship/EntryPoint.class" afterPath="$PROJECT_DIR$/out/production/SeaFight/com/pukhova/battleship/EntryPoint.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/pukhova/battleship/EntryPoint.java" afterPath="$PROJECT_DIR$/src/com/pukhova/battleship/EntryPoint.java" />
     </list>
@@ -27,8 +28,8 @@
       <file leaf-file-name="EntryPoint.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/pukhova/battleship/EntryPoint.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="18" column="32" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="32" />
+            <state relative-caret-position="425">
+              <caret line="43" column="9" selection-start-line="43" selection-start-column="9" selection-end-line="43" selection-end-column="9" />
               <folding>
                 <element signature="e#822#831#0" expanded="true" />
                 <element signature="e#894#903#0" expanded="true" />
@@ -487,7 +488,14 @@
       <option name="project" value="LOCAL" />
       <updated>1476808920791</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Fourth commit from work">
+      <created>1477057706183</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1477057706183</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -535,7 +543,8 @@
     <option name="SHOW_DIRTY_RECURSIVELY" value="true" />
     <MESSAGE value="Second commit from work" />
     <MESSAGE value="Third commit from work" />
-    <option name="LAST_COMMIT_MESSAGE" value="Third commit from work" />
+    <MESSAGE value="Fourth commit from work" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fourth commit from work" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -823,8 +832,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/pukhova/battleship/EntryPoint.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="18" column="32" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="32" />
+        <state relative-caret-position="425">
+          <caret line="43" column="9" selection-start-line="43" selection-start-column="9" selection-end-line="43" selection-end-column="9" />
           <folding>
             <element signature="e#822#831#0" expanded="true" />
             <element signature="e#894#903#0" expanded="true" />
